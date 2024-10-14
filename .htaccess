@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redireciona todas as requisições para o index.php
+    RewriteRule ^(.*)$ public/index.php [L]
+
+    # Permite o acesso à API
+    RewriteCond %{REQUEST_URI} ^/api-laravel.tataweb.com.br/public/.* [NC]
+    RewriteRule ^api-laravel.tataweb.com.br/public/(.*)$ /$1 [L]
+
+    # Ajusta para o diretório da aplicação
+    RewriteBase /public/
+
+    # Se não for um arquivo ou diretório existente, redireciona para index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
